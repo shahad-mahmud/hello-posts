@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.configs import app_configs, settings
 from app.database import create_tables
+from app.posts.routers import router as posts_router
 from app.users.routers import router as users_router
 
 
@@ -27,3 +28,4 @@ app.add_middleware(
 app.get("/")(lambda: {"message": "Hello World"})
 
 app.include_router(users_router, tags=["users"], prefix="/users")
+app.include_router(posts_router, tags=["posts"], prefix="/posts")

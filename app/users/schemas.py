@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class UserDetails(BaseModel):
@@ -8,7 +8,7 @@ class UserDetails(BaseModel):
 
 
 class CreateUserRequest(BaseModel):
-    name: str
+    name: str = Field(..., min_length=3, max_length=128)
     email: EmailStr
 
 

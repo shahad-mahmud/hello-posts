@@ -33,7 +33,7 @@ class Post(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     content = Column(String)
-    user_id = Column(Integer, index=True)
+    author_id = Column(Integer, index=True)
 
 
 def create_tables():
@@ -51,7 +51,9 @@ def execute(query: Insert | Update):
 def fetch_one(query: Select) -> dict[str, Any] | None:
     with engine.connect() as connection:
         cursor: CursorResult = connection.execute(query)
-        return cursor.first()._asdict() if cursor.rowcount > 0 else None
+        data = cursor.fetchone()
+
+        return data if data else None
 
 
 def fetch_all(query: Select) -> list[dict[str, Any]]:

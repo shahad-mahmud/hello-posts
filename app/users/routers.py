@@ -29,7 +29,7 @@ def get_user(id: int):
     return {"message": "got user", "data": data}
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=dict)
 def create_user(user: CreateUserRequest):
     create_user_service(user)
     return {"message": "user created"}

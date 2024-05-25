@@ -17,7 +17,7 @@ def create_user_service(user: CreateUserRequest):
     db_user = fetch_one(query)
 
     if db_user:
-        return EmailAlreadyExists()
+        raise EmailAlreadyExists()
 
     query = User.__table__.insert().values(**user.model_dump())
 
