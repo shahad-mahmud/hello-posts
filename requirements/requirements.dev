@@ -1,0 +1,4 @@
+-r requirements.prod
+pytest
+pytest-cov
+pre-commit

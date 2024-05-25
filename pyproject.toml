@@ -1,0 +1,8 @@
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = [
+    "--import-mode=importlib",
+]
+
+[tool.bandit.assert_used]
+skips = ['tests/**_test.py', '**/test_*.py']

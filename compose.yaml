@@ -1,0 +1,14 @@
+services:
+  helloposts:
+    container_name: hello-posts-dev
+    image: img-hello-posts-dev
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/src
+    ports:
+      - 8108:8000
