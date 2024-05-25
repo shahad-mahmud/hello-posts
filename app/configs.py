@@ -14,6 +14,8 @@ class Config(BaseSettings):
 
     BASE_URL: str = "/api/v1"
 
+    DATABASE_URL: str = "sqlite:///./app.db"
+
 
 @dataclasses.dataclass
 class AppConfigs:

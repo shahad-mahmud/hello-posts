@@ -1,9 +1,20 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.configs import app_configs, settings
+from app.database import create_tables
+from app.users.routers import router as users_router
 
-app = FastAPI(**app_configs)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_tables()
+    yield
+
+
+app = FastAPI(**app_configs, lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,3 +25,5 @@ app.add_middleware(
 )
 
 app.get("/")(lambda: {"message": "Hello World"})
+
+app.include_router(users_router, tags=["users"], prefix="/users")
