@@ -53,7 +53,7 @@ def fetch_one(query: Select) -> dict[str, Any] | None:
         cursor: CursorResult = connection.execute(query)
         data = cursor.fetchone()
 
-        return data if data else None
+        return data._asdict() if data else None
 
 
 def fetch_all(query: Select) -> list[dict[str, Any]]:
